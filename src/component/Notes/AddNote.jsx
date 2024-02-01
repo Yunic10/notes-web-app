@@ -58,10 +58,13 @@
 // export default AddNote;
 
 import { useState } from 'react'
+import {Input, Textarea, Button, Stack} from '@chakra-ui/react'
+import {useToast} from '@chakra-ui/react'
 
 export function AddNote( props ){
     const [item, SetNewItem] = useState("")
     const [content, SetNewContent] = useState("")
+    const toast = useToast()
 
     function handleSubmit (e) {
         e.preventDefault()
@@ -72,14 +75,25 @@ export function AddNote( props ){
         
         SetNewItem("")
         SetNewContent("")
+
+        toast({
+            title: 'Note Added',
+            description: 'Catatan anda sudah berhasil ditambahkan',
+            status: 'success',
+            position:'bottom-right',
+            duration: 3000,
+            isClosable: true,
+        })
       }
       
     return (
         <form action="" onSubmit={handleSubmit}>
-        <input type="text" value={item} onChange={e => SetNewItem(e.target.value)} /><br/>
-        <input type="text" value={content} onChange={e => SetNewContent(e.target.value)} /><br/>
-        <button type='submit'>Tambah</button>
-      </form>
+            <Stack spacing={0}>
+                <Input type="text" placeholder='Notes Title...' value={item} onChange={e => SetNewItem(e.target.value)} /><br/>
+                <Textarea type="text" placeholder='Type Your Note Here...' value={content} onChange={e => SetNewContent(e.target.value)} /><br/>
+                <Button type='submit' colorScheme='yellow'>Tambah</Button>
+            </Stack>
+        </form>
     )
 }
 
