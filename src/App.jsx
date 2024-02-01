@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import AddNote from './component/Notes/AddNote';
 import { NoteList } from './component/Notes/NoteList';
-import { ChakraProvider, Text, useToast, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay, Button } from '@chakra-ui/react';
+import { Box, ChakraProvider, Text, useToast, Input } from '@chakra-ui/react';
+import { Header } from './component/Head/Header';
+import DeleteAlert from './component/Notes/DeleteAlert';
 
 function App() {
   const [todos, setTodos] = useState(() => {
@@ -19,6 +21,16 @@ function App() {
   const toast = useToast();
   const [deleteAlert, setDeleteAlert] = useState();
   const [selectedNoteId, setSelectedNoteId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredTodos, setFilteredTodos] = useState([]);
+
+  useEffect(() => {
+    const filtered = todos.filter(todo =>
+      todo.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      todo.content.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredTodos(filtered);
+  }, [todos, searchTerm]);
 
   function addTodo(title, content) {
     setTodos(currentTodos => [
@@ -79,37 +91,15 @@ function App() {
 
   return (
     <ChakraProvider>
-      <Text fontSize={"4xl"} marginY={2}>Type Your Note Here!</Text>
-      <AddNote onSubmit={addTodo} />
-      <NoteList todos={todos} deleteTodo={deleteTodoAlert} onPin={onPin} />
-
+      <Header onSearchChange={setSearchTerm} />
+      <Box padding={'2rem'} paddingX={'6rem'}>
+        <Text fontSize={"4xl"} marginY={2}>Type Your Note Here!</Text>
+        
+        <AddNote onSubmit={addTodo} />
+        <NoteList todos={filteredTodos} deleteTodo={deleteTodoAlert} onPin={onPin} />
+      </Box>
       {/* Delete Alert */}
-      <AlertDialog
-        isOpen={deleteAlert}
-        leastDestructiveRef={undefined}
-        onClose={cancelDelete}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Note
-            </AlertDialogHeader>
-
-            <AlertDialogBody>
-              Are you sure you want to delete this note? This action cannot be undone.
-            </AlertDialogBody>
-
-            <AlertDialogFooter>
-              <Button onClick={cancelDelete}>
-                Cancel
-              </Button>
-              <Button colorScheme="red" onClick={deleteTodo} ml={3}>
-                Delete
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+      <DeleteAlert isOpen={deleteAlert} onClose={cancelDelete} onDelete={deleteTodo} noteTitle={todos.find(todo => todo.id === selectedNoteId)?.title} />
     </ChakraProvider>
   );
 }
