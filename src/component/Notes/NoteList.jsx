@@ -27,7 +27,7 @@ export function NoteList({ todos, deleteTodo, onPin }) {
             )} 
         </SimpleGrid>
         <Text textAlign={'left'} fontSize={"2xl"} marginY={4}>Note</Text>
-        <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+        <SimpleGrid spacing={4} marginBottom={12} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
             {unpinnedNotes.length === 0 ? 
             <Text fontSize={"large"} textAlign={"left"}>No Notes</Text> :
             unpinnedNotes.length > 0 && (
