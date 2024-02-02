@@ -1,11 +1,17 @@
 import { NoteItem } from "./NoteItem";
 import {SimpleGrid, Text} from "@chakra-ui/react";
+import PropTypes from 'prop-types'
 
 export function NoteList({ todos, deleteTodo, onPin }) {
   const pinnedNotes = todos.filter(todo => todo.pin);
   const unpinnedNotes = todos.filter(todo => !todo.pin);
   const variant = "outlined";
 
+  NoteList.propTypes = {
+    todos: PropTypes.array.isRequired,
+    deleteTodo: PropTypes.func.isRequired,
+    onPin: PropTypes.func.isRequired,
+  };
   return (
     <>
         <Text textAlign={'left'} fontSize={"2xl"} marginY={4}>Pinned Note</Text>

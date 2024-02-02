@@ -1,9 +1,18 @@
 import { Card, CardHeader, CardBody, CardFooter, Button, ButtonGroup, Heading, Text } from '@chakra-ui/react'
 import {TriangleUpIcon, DeleteIcon, TriangleDownIcon} from '@chakra-ui/icons'
-
+import PropTypes from 'prop-types'
 
 export function NoteItem({id, title ,content, onPin ,date, pin, deleteTodo, variant}) {
-    
+    NoteItem.propTypes = {
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        content: PropTypes.string.isRequired,
+        onPin: PropTypes.func.isRequired,
+        date: PropTypes.string.isRequired,
+        pin: PropTypes.bool.isRequired,
+        deleteTodo: PropTypes.func.isRequired,
+        variant: PropTypes.string,
+      };
     return <>
         
         <Card variant={variant}>

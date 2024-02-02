@@ -67,11 +67,16 @@ import {
     AccordionPanel,
     AccordionIcon,
   } from '@chakra-ui/react'
+  import PropTypes from 'prop-types'
 
 export function AddNote( props ){
     const [item, SetNewItem] = useState("")
     const [content, SetNewContent] = useState("")
     const toast = useToast()
+
+    AddNote.propTypes = {
+        onSubmit: PropTypes.func.isRequired,
+      };
 
     function handleSubmit (e) {
         e.preventDefault()

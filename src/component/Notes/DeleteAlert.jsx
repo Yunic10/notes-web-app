@@ -2,9 +2,16 @@
 
 
 import { AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay, Button } from '@chakra-ui/react';
+import PropTypes from 'prop-types'
 
 function DeleteAlert({ isOpen, onClose, onDelete, noteTitle }) {
-  return (
+    DeleteAlert.propTypes = {
+        isOpen: PropTypes.bool.isRequired,
+        onClose: PropTypes.func.isRequired,
+        onDelete: PropTypes.func.isRequired,
+        noteTitle: PropTypes.string.isRequired,
+      };
+    return (
     <AlertDialog
       isOpen={isOpen}
       leastDestructiveRef={undefined}
@@ -17,7 +24,7 @@ function DeleteAlert({ isOpen, onClose, onDelete, noteTitle }) {
           </AlertDialogHeader>
 
           <AlertDialogBody>
-            Are you sure you want to delete the note "{noteTitle}"? This action cannot be undone.
+            Are you sure you want to delete the note &quot;{noteTitle}&quot;? This action cannot be undone.
           </AlertDialogBody>
 
           <AlertDialogFooter>
