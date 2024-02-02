@@ -1,6 +1,6 @@
 // DeleteAlert.jsx
 
-import React from 'react';
+
 import { AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay, Button } from '@chakra-ui/react';
 
 function DeleteAlert({ isOpen, onClose, onDelete, noteTitle }) {

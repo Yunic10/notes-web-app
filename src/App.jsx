@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import AddNote from './component/Notes/AddNote';
 import { NoteList } from './component/Notes/NoteList';
-import { Box, ChakraProvider, Text, useToast, Input } from '@chakra-ui/react';
+import { Box, ChakraProvider, Text, useToast } from '@chakra-ui/react';
 import { Header } from './component/Head/Header';
 import DeleteAlert from './component/Notes/DeleteAlert';
 import Footer from './component/Footer/Footer';

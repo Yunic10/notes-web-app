@@ -1,7 +1,7 @@
 {
   "homepage": "https://yunic10.github.io/notes-web-app",
   "name": "notes-app",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
