@@ -2,18 +2,19 @@ import { Card, CardHeader, CardBody, CardFooter, Button, ButtonGroup, Heading, T
 import {TriangleUpIcon, DeleteIcon, TriangleDownIcon} from '@chakra-ui/icons'
 
 
-export function NoteItem({id, title ,content, onPin , pin, deleteTodo, variant}) {
+export function NoteItem({id, title ,content, onPin ,date, pin, deleteTodo, variant}) {
     
     return <>
         
         <Card variant={variant}>
-            <CardHeader>
-                <Heading size='md' textAlign={'left'}>{title}</Heading>
+            <CardHeader padding={'12px'} paddingBottom={0}>
+                <Heading size='md' textAlign={'left'} paddingBottom={0}>{title}</Heading>
             </CardHeader>
-            <CardBody>
+            <CardBody padding={'12px'} paddingTop={'0'}>
+                <Text textAlign={'left'} fontSize={'small'} paddingBottom={1}>{date}</Text>
                 <Text textAlign={'left'}>{content}</Text>
             </CardBody>
-            <CardFooter>
+            <CardFooter padding={'12px'}>
                 <ButtonGroup margin={'auto'} w={"100%"} >
                     {pin === false ? (
                             <Button w={"100%"} leftIcon={<TriangleUpIcon/>} colorScheme='teal' onClick={() => onPin(id)}>Pin</Button>

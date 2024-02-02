@@ -5,6 +5,7 @@ import { NoteList } from './component/Notes/NoteList';
 import { Box, ChakraProvider, Text, useToast, Input } from '@chakra-ui/react';
 import { Header } from './component/Head/Header';
 import DeleteAlert from './component/Notes/DeleteAlert';
+import Footer from './component/Footer/Footer';
 
 function App() {
   const [todos, setTodos] = useState(() => {
@@ -33,9 +34,10 @@ function App() {
   }, [todos, searchTerm]);
 
   function addTodo(title, content) {
+    const currentDate = new Date().toLocaleString(); //ngambil date sebagai string
     setTodos(currentTodos => [
       ...currentTodos,
-      { id: crypto.randomUUID(), title, content, pin: false },
+      { id: crypto.randomUUID(), title, content,date: currentDate, pin: false },
     ]);
   }
 
@@ -78,6 +80,7 @@ function App() {
       title: 'Note Deleted',
       description: `Note "${deletedNote.title}" has been deleted.`,
       status: 'error',
+      position: 'bottom-right',
       duration: 3000,
       isClosable: true,
     });
@@ -100,6 +103,7 @@ function App() {
       </Box>
       {/* Delete Alert */}
       <DeleteAlert isOpen={deleteAlert} onClose={cancelDelete} onDelete={deleteTodo} noteTitle={todos.find(todo => todo.id === selectedNoteId)?.title} />
+      <Footer/>
     </ChakraProvider>
   );
 }

@@ -59,7 +59,14 @@
 
 import { useState } from 'react'
 import {Input, Textarea, Button, Stack} from '@chakra-ui/react'
-import {useToast} from '@chakra-ui/react'
+import {useToast, Box, Text} from '@chakra-ui/react'
+import {
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+  } from '@chakra-ui/react'
 
 export function AddNote( props ){
     const [item, SetNewItem] = useState("")
@@ -87,13 +94,27 @@ export function AddNote( props ){
       }
       
     return (
-        <form action="" onSubmit={handleSubmit}>
-            <Stack spacing={0}>
-                <Input type="text" placeholder='Notes Title...' value={item} onChange={e => SetNewItem(e.target.value)} /><br/>
-                <Textarea type="text" placeholder='Type Your Note Here...' value={content} onChange={e => SetNewContent(e.target.value)} /><br/>
-                <Button type='submit' colorScheme='yellow'>Tambah</Button>
-            </Stack>
-        </form>
+        <Accordion defaultIndex={[1]} allowMultiple>
+            <AccordionItem>
+                <Text fontSize={'2xl'}>
+                <AccordionButton>
+                    <Box as="span" flex='1' textAlign='left' fontWeight={'bold'} fontSize={'large'}>
+                        Add New Note Here!
+                    </Box>
+                    <AccordionIcon />
+                </AccordionButton>
+                </Text>
+                <AccordionPanel pb={4}>
+                    <form action="" onSubmit={handleSubmit}>
+                        <Stack spacing={0}>
+                            <Input type="text" placeholder='Notes Title...' value={item} onChange={e => SetNewItem(e.target.value)} /><br/>
+                            <Textarea type="text" placeholder='Type Your Note Here...' value={content} onChange={e => SetNewContent(e.target.value)} /><br/>
+                            <Button type='submit' colorScheme='yellow'>Tambah</Button>
+                        </Stack>
+                    </form>
+                </AccordionPanel>
+            </AccordionItem>
+            </Accordion>
     )
 }
 
