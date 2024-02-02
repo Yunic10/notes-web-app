@@ -6,8 +6,10 @@ import { Box, ChakraProvider, Text, useToast } from '@chakra-ui/react';
 import { Header } from './component/Head/Header';
 import DeleteAlert from './component/Notes/DeleteAlert';
 import Footer from './component/Footer/Footer';
+import {useMediaQuery} from '@chakra-ui/react';
 
 function App() {
+  const isLargerThan420 = useMediaQuery('(min-width: 420px)');
   const [todos, setTodos] = useState(() => {
     const localValue = localStorage.getItem("NOTES");
     if (localValue == null) return [];
@@ -95,7 +97,7 @@ function App() {
   return (
     <ChakraProvider>
       <Header onSearchChange={setSearchTerm} />
-      <Box padding={'2rem'} paddingX={'6rem'}>
+      <Box padding={'2rem'} paddingX={isLargerThan420 ? '6rem' : '2rem'}>
         <Text fontSize={"4xl"} marginY={2}>Type Your Note Here!</Text>
         
         <AddNote onSubmit={addTodo} />
